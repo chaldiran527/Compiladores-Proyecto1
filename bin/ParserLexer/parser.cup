@@ -31,6 +31,14 @@ scan with {: return lex.next_token(); :};
 terminal            SEMI, PLUS, MINUS, TIMES, UMINUS, LPAREN, RPAREN;
 terminal Integer    NUMBER;        // our scanner provides numbers as integers
 
+//Terminales unarios
+terminal NAVIDAD;
+
+//Terminales binarios
+
+//Terminales aritmeticos
+
+//Terminales binarios
 /* Non terminals */
 non terminal            expr_list;
 non terminal Integer    expr;      // used to store evaluated subexpressions

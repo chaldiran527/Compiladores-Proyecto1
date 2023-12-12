@@ -42,8 +42,11 @@ Identifier = [:jletter:] [:jletterdigit:]*
 
 //DecIntegerLiteral = 0 | [1-9][0-9]*
 //Entero visto en clase
-Caracter = '[a-zA-Z]' | '!\"#\$%&\'()\*\+\,\-\.\/:;<=>\?@\[\]\\\^_`{}\~�' | '[0-9]'
+//Caracter = '[a-zA-Z]' | '!\"#\$%&\'()\*\+\,\-\.\/:;<=>\?@\[\]\\\^_`{}\~�' | '[0-9]'
+//Caracter = [a-zA-Z]' | '!\"#\$%&\'()\*\+\,\-\.\/:;<=>\?@\[\]\\\^_`{}\~\\´┐¢' | '[0-9]'
 
+
+//DEFINIR LAS EXPRESIONES 
 digito = [0-9]
 digitoNoCero = [1-9]
 DecIntegerLiteral = (-?{digitoNoCero} {digito}*) //No permite negativos  -?opcionalmente un no cero y pueden haber cero o mas digitos de 0-9
@@ -68,10 +71,11 @@ DecIntegerLiteral = (-?{digitoNoCero} {digito}*) //No permite negativos  -?opcio
     \"                             { string.setLength(0); yybegin(STRING); }
 
     /* operators */
+
     "="                            { return symbol(sym.EQ); }
     "=="                           { return symbol(sym.EQEQ); }
     "+"                            { return symbol(sym.PLUS); }
-
+    "*"
     /* comments */
     {Comment}                      { /* ignore */ }
     
