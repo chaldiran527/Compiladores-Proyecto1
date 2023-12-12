@@ -70,7 +70,7 @@ DecIntegerLiteral = (-?{digitoNoCero} {digito}*) //No permite negativos  -?opcio
     {DecIntegerLiteral}            { return symbol(sym.INTEGER_LITERAL); }
     \"                             { string.setLength(0); yybegin(STRING); }
 
-    /* operators */
+    /* operadores  */
 
     "="                            { return symbol(sym.EQ); }
     "=="                           { return symbol(sym.EQEQ); }

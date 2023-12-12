@@ -26,10 +26,10 @@ public class App {
         String[] strArrParser = { fullPathParser };
         mfjc.iniLexerParser(fullPathLexer, strArrParser);
 
-        // Files.move(Paths.get(basePath + "\\sym.java"), Paths.get(basePath +
-        // "\\src\\ParserLexer\\sym.java"));
-        // Files.move(Paths.get(basePath + "\\" + jparser), Paths.get(basePath +
-        // "\\src\\ParserLexer\\" + jparser));
+        Files.move(Paths.get(basePath + "\\sym.java"), Paths.get(basePath +
+                "\\src\\ParserLexer\\sym.java"));
+        Files.move(Paths.get(basePath + "\\" + jparser), Paths.get(basePath +
+                "\\src\\ParserLexer\\" + jparser));
         // Files.move(Paths.get(basePath + "\\src\\" + jlexerCarpeta + "\\" + jlexer),
         // Paths.get(basePath + "\\src\\ParseLexer\\" + jlexer));
     }
@@ -47,7 +47,7 @@ public class App {
 
     }
 
-    public static void generarPrueba() throws Exception {
+    public static void GenerarPrueba() throws Exception {
         String basePath, fullPathParser;
         MainJFlexCup mfjc;
 
@@ -56,7 +56,8 @@ public class App {
 
         mfjc = new MainJFlexCup();
 
-        mfjc.pruebaLexer(fullPathParser);
+        // mfjc.pruebaLexer(fullPathParser);
+        mfjc.pruebaLexer2(fullPathParser);
     }
 
     public static void main(String[] args) throws Exception {
@@ -64,11 +65,11 @@ public class App {
         System.out.println("This?");
         basePath = basePath + "\\src\\ParserLexer\\lexerCup.jflex";
         System.out.println(basePath);
-        GenerarLexerParser();
+        // GenerarLexerParser();
 
         // GenerarBasico();
-        // PruebasLexerParser();
-        // Sym.java ni lexerCup.java no deben tener errores
+        GenerarPrueba();
+
     }
 }
 

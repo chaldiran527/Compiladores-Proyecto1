@@ -32,7 +32,7 @@ terminal            SEMI, PLUS, MINUS, TIMES, UMINUS, LPAREN, RPAREN;
 terminal Integer    NUMBER;        // our scanner provides numbers as integers
 
 //Terminales unarios
-terminal NAVIDAD;
+terminal NAVIDAD, IDENTIFIER, INTEGER_LITERAL, EQ, EQEQ, l_PAPANOEL, BREAK, BOOLEAN;
 
 //Terminales binarios
 
