@@ -1,7 +1,3 @@
-Token: 11, Valor: public
-Token: 10, Valor: abstract
-Token: 11, Valor: hola
-Token: 12, Valor: 10
-Token: 11, Valor: h
-Token: 11, Valor: hola
-Cantidad de lexemas encontrados: 6
+Token: 15, Valor: String
+Token: 11, Valor: Salud
+Cantidad de lexemas encontrados: 2

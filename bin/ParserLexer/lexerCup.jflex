@@ -3,8 +3,6 @@ package ParserLexer;
 import java.io.StringReader;
 import java_cup.runtime.*;
 
-// ... (otras importaciones y definiciones)
-
 %class Lexer
 %public 
 %unicode
@@ -13,13 +11,23 @@ import java_cup.runtime.*;
 %column
 
 %{
-    StringBuffer string = new StringBuffer();
+    private int errorCount = 0;
 
     private Symbol symbol(int type) {
         return new Symbol(type, yyline, yycolumn);
     }
+
     private Symbol symbol(int type, Object value) {
         return new Symbol(type, yyline, yycolumn, value);
+    }
+
+    // Método para manejar errores y recuperación
+    private void handleError(String message) {
+        System.err.println("Error: " + message + " en la línea " + yyline + ", columna " + yycolumn);
+        errorCount++;
+        // Puedes agregar más lógica de recuperación aquí si es necesario
+        // Por ejemplo, puedes avanzar al siguiente ';' o '}' si el error ocurre dentro de una expresión o bloque.
+        // También puedes ignorar caracteres hasta encontrar un punto seguro para continuar.
     }
 %}
 
@@ -27,25 +35,24 @@ import java_cup.runtime.*;
 
 /* Reglas de recuperación en modo pánico */
 <YYINITIAL,ERROR> {
-    /* Caracteres no válidos */
+    // Caracteres no válidos, se intenta avanzar al siguiente caracter reconocible
     [^] { 
-        System.err.println("Error: Carácter no reconocido en la línea " + yyline + ", columna " + yycolumn);
         yycolumn++;
-        return symbol(sym.ERROR); // Puedes cambiar esto según tus necesidades
+        return symbol(sym.ERROR);
     }
 }
 
 <YYINITIAL,ERROR> "*/" {
-    /* Fin de comentario no encontrado */
-    System.err.println("Error: Fin de comentario no encontrado en la línea " + yyline + ", columna " + yycolumn);
+    // Fin de comentario no encontrado, se intenta recuperar
     yybegin(YYINITIAL);
-    return symbol(sym.ERROR); // Puedes cambiar esto según tus necesidades
+    yycolumn += 2; // Avanzar dos caracteres para evitar un bucle infinito
+    return symbol(sym.ERROR);
 }
 
 <YYINITIAL,ERROR> [^ \t\n\r]* {
-    /* Ignorar cualquier otro carácter durante la recuperación */
+    // Ignorar cualquier otro carácter durante la recuperación
     yycolumn += yylength();
-    return symbol(sym.ERROR); // Puedes cambiar esto según tus necesidades
+    return symbol(sym.ERROR);
 }
 
 LineTerminator = \r|\n|\r\n
@@ -77,42 +84,51 @@ DecIntegerLiteral = (-?{digitoNoCero} {digito}*)
 <YYINITIAL> "break"              { return symbol(sym.BREAK); }
 
 <YYINITIAL> {
-    /* identifiers */ 
+    // Identificadores
     {Identifier}                   { return symbol(sym.IDENTIFIER); }
     
-    /* literals cuando hay comilla doble entra a string*/
+    // Literales cuando hay comillas dobles, entra al estado STRING
     {DecIntegerLiteral}            { return symbol(sym.INTEGER_LITERAL); }
-    \"                             { string.setLength(0); yybegin(STRING); }
+    \"                             { yybegin(STRING); }
 
-    /* operadores  */
-
+    // Operadores y otros tokens
     "="                            { return symbol(sym.EQ); }
     "=="                           { return symbol(sym.EQEQ); }
     "+"                            { return symbol(sym.PLUS); }
-    "*"
-    /* comments */
-    {Comment}                      { /* ignore */ }
     
-    /* whitespace */
+    // Comentarios
+    {Comment}                      { /* ignore */ }
+
+    // Espacios en blanco
     {WhiteSpace}                   { /* ignore */ }
+
+    // Cualquier otro carácter no reconocido
+    .                              { handleError("Carácter no reconocido"); }
 }
 
 <STRING> {
+    // Literal de cadena cerrado correctamente
     \"                             { yybegin(YYINITIAL); 
                                     return symbol(sym.l_PAPANOEL, 
-                                    string.toString()); }
-    [^\n\r\"\\]+                   { string.append( yytext() ); }
-    \\t                            { string.append('\t'); }
-    \\n                            { string.append('\n'); }
-
-    \\r                            { string.append('\r'); }
-    \\\"                           { string.append('\"'); }
-    \\                             { string.append('\\'); }
+                                    yytext().toString()); }
+    
+    // Contenido de cadena
+    [^\n\r\"\\]+                   { /* puedes manejar contenido de cadena si es necesario */ }
+    
+    // Caracteres de escape
+    \\t                            { /* manejar tabulación si es necesario */ }
+    \\n                            { /* manejar nueva línea si es necesario */ }
+    \\r                            { /* manejar retorno de carro si es necesario */ }
+    \\\"                           { /* manejar comilla doble si es necesario */ }
+    \\                             { /* manejar barra invertida si es necesario */ }
+    
+    // Cualquier otro carácter no reconocido en el estado STRING
+    .                              { handleError("Carácter no reconocido en la cadena"); }
 }
 
 /* error fallback */
 [^]                              { 
-                                    System.err.println("Error: Carácter no reconocido en la línea " + yyline + ", columna " + yycolumn);
+                                    handleError("Carácter no reconocido");
                                     yycolumn++;
-                                    return symbol(sym.ERROR); // Puedes cambiar esto según tus necesidades
+                                    return symbol(sym.ERROR);
                                 }
