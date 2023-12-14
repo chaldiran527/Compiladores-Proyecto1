@@ -2,5 +2,6 @@ Token: 11, Valor: public
 Token: 10, Valor: abstract
 Token: 11, Valor: hola
 Token: 12, Valor: 10
-Token: 15, Valor: hola
-Cantidad de lexemas encontrados: 5
+Token: 11, Valor: h
+Token: 11, Valor: hola
+Cantidad de lexemas encontrados: 6
