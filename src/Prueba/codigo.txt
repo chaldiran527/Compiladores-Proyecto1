@@ -1,2 +1,10 @@
-"String"
-Salud
+abstract carro = 'c' @ Comentario de una sola linea
+abstract saludo -10.3 = "hola" 
+abstract 2cas = 10
+5 + -3 
+5 > 3
+/_ Comentario multilinea
+ 1asd2
+ "String" @ Dasdasd
+ Salud
+_/

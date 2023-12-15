@@ -3,6 +3,9 @@ package ParserLexer;
 import java.io.StringReader;
 import java_cup.runtime.*;
 
+/* Options and declarations */
+%%
+
 %class Lexer
 %public 
 %unicode
@@ -11,6 +14,7 @@ import java_cup.runtime.*;
 %column
 
 %{
+    StringBuffer string = new StringBuffer();
     private int errorCount = 0;
 
     private Symbol symbol(int type) {
@@ -31,7 +35,122 @@ import java_cup.runtime.*;
     }
 %}
 
+LineTerminator = \r|\n|\r\n
+InputCharacter = [^\r\n]
+WhiteSpace     = {LineTerminator} | [ \t\f]
+
+/* commentarios */
+Comment = {TraditionalComment} | {EndOfLineComment} | {DocumentationComment}
+
+TraditionalComment   = "/\_" [^\_] ~"\_/" | "/\_" "\_"+ "/"
+EndOfLineComment     = "@" {InputCharacter}* {LineTerminator}?
+DocumentationComment = "/**" {CommentContent} "*"+ "/"
+CommentContent       =  ([^\_] | \_+ [^/\_])*
+
+Identifier = [:jletter:] [:jletterdigit:]*
+
+//DEFINIR LAS EXPRESIONES 
+digito = [0-9]
+digitoNoCero = [1-9]
+DecIntegerLiteral = (-?{digitoNoCero} {digito}*)
+
+Float = -? (0 | {digitoNoCero} {digito}*) ("." {digito}+)? (("e" | "E") -? {digito}+)?
+
+Delimiter = \|
+
+OpenParenthesis = \(
+CloseParenthesis = \(
+OpenBrackets = \[
+CloseBrackets =\]
+OpenBraces = \{
+CloseBraces =\}
+Assignment = \<\=
+
+Not = \!
+And =  \^
+Or = \#
+
+//Operadores Aritmeticos
+
+Decrement = \-\-
+Increment = \+\+
+Addition = \+
+Substraction = \- 
+DivisionFloat = \/
+DivisionInteger = \/\/
+Power = \*\*
+Product = \*
+Mod = \~
+
+Comma = \,
+Character = \' {InputCharacter} \'
+
+/* Lexical rules */
+%state STRING
 %state ERROR
+
+%%
+
+
+/* keywords */
+<YYINITIAL> "abstract"           { return symbol(sym.NAVIDAD); }
+<YYINITIAL> "boolean"            { return symbol(sym.BOOLEAN); }
+<YYINITIAL> "break"              { return symbol(sym.BREAK); }
+
+
+<YYINITIAL> {
+
+    // Identificadores
+    {Decrement}                           { return symbol(sym.QUIEN); }
+    
+    {Identifier}                   { return symbol(sym.IDENTIFIER); }
+//    \"                             { string.setLength(0); yybegin(STRING);  }
+
+    // Comentarios
+    {Comment}                      { /* ignore */ }
+    \"                             {string.setLength(0); yybegin(STRING); }
+
+
+
+    // Operadores y otros tokens
+    "="                            { return symbol(sym.EQ); }
+    "=="                           { return symbol(sym.e_jinglebell); }
+    "+"                            { return symbol(sym.PLUS); }
+    "!="                           { return symbol(sym.ne_tinseltoes); }
+    "<"                            { return symbol(sym.l_slinky); }
+    ">"                            { return symbol(sym.g_merryberry); }
+    ">="                           { return symbol(sym.ge_snowflake); }
+    "<="                           { return symbol(sym.le_candycane); }
+
+
+    {DecIntegerLiteral}            { return symbol(sym.INTEGER_LITERAL); }
+
+    {Float}                        { return symbol(sym.l_float_santa);}
+    {Character}                    { return symbol(sym.REGALO);} 
+
+    // Espacios en blanco
+    {WhiteSpace}                   { /* ignore */ }
+
+    // Cualquier otro carácter no reconocido
+    .                              { handleError("Carácter no reconocido"); }
+}
+
+<STRING> {
+    \"                             { yybegin(YYINITIAL); 
+                                    return symbol(sym.l_PAPANOEL, 
+                                    ("\"" + string.toString() + "\"")); }
+
+    [^\n\r\"\\]                   { string.append( yytext() ); }
+    \\t                            { string.append('\t'); }
+    \\n                            { string.append('\n'); }
+
+    \\r                            { string.append('\r'); }
+    \\\"                           { string.append('\"'); }
+    \\                             { string.append('\\'); }  
+    
+    // Cualquier otro carácter no reconocido en el estado STRING
+    .                              { handleError("Carácter no reconocido en la cadena"); }
+}
 
 /* Reglas de recuperación en modo pánico */
 <YYINITIAL,ERROR> {
@@ -55,76 +174,6 @@ import java_cup.runtime.*;
     return symbol(sym.ERROR);
 }
 
-LineTerminator = \r|\n|\r\n
-InputCharacter = [^\r\n]
-WhiteSpace     = {LineTerminator} | [ \t\f]
-
-/* comments */
-Comment = {TraditionalComment} | {EndOfLineComment} | {DocumentationComment}
-
-TraditionalComment   = "/*" [^*] ~"*/" | "/*" "*"+ "/"
-EndOfLineComment     = "//" {InputCharacter}* {LineTerminator}?
-DocumentationComment = "/**" {CommentContent} "*"+ "/"
-CommentContent       = ( [^*] | \*+ [^/*] )*
-
-Identifier = [:jletter:] [:jletterdigit:]*
-
-//DEFINIR LAS EXPRESIONES 
-digito = [0-9]
-digitoNoCero = [1-9]
-DecIntegerLiteral = (-?{digitoNoCero} {digito}*)
-
-%state STRING
-
-%%
-
-/* keywords */
-<YYINITIAL> "abstract"           { return symbol(sym.NAVIDAD); }
-<YYINITIAL> "boolean"            { return symbol(sym.BOOLEAN); }
-<YYINITIAL> "break"              { return symbol(sym.BREAK); }
-
-<YYINITIAL> {
-    // Identificadores
-    {Identifier}                   { return symbol(sym.IDENTIFIER); }
-    
-    // Literales cuando hay comillas dobles, entra al estado STRING
-    {DecIntegerLiteral}            { return symbol(sym.INTEGER_LITERAL); }
-    \"                             { yybegin(STRING); }
-
-    // Operadores y otros tokens
-    "="                            { return symbol(sym.EQ); }
-    "=="                           { return symbol(sym.EQEQ); }
-    "+"                            { return symbol(sym.PLUS); }
-    
-    // Comentarios
-    {Comment}                      { /* ignore */ }
-
-    // Espacios en blanco
-    {WhiteSpace}                   { /* ignore */ }
-
-    // Cualquier otro carácter no reconocido
-    .                              { handleError("Carácter no reconocido"); }
-}
-
-<STRING> {
-    // Literal de cadena cerrado correctamente
-    \"                             { yybegin(YYINITIAL); 
-                                    return symbol(sym.l_PAPANOEL, 
-                                    yytext().toString()); }
-    
-    // Contenido de cadena
-    [^\n\r\"\\]+                   { /* puedes manejar contenido de cadena si es necesario */ }
-    
-    // Caracteres de escape
-    \\t                            { /* manejar tabulación si es necesario */ }
-    \\n                            { /* manejar nueva línea si es necesario */ }
-    \\r                            { /* manejar retorno de carro si es necesario */ }
-    \\\"                           { /* manejar comilla doble si es necesario */ }
-    \\                             { /* manejar barra invertida si es necesario */ }
-    
-    // Cualquier otro carácter no reconocido en el estado STRING
-    .                              { handleError("Carácter no reconocido en la cadena"); }
-}
 
 /* error fallback */
 [^]                              { 

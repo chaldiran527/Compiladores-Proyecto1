@@ -31,14 +31,32 @@ scan with {: return lex.next_token(); :};
 terminal            SEMI, PLUS, MINUS, TIMES, UMINUS, LPAREN, RPAREN;
 terminal Integer    NUMBER;        // our scanner provides numbers as integers
 
-//Terminales unarios
-terminal NAVIDAD, IDENTIFIER, INTEGER_LITERAL, EQ, EQEQ, l_PAPANOEL, BREAK, BOOLEAN;
+//Terminales de parentesis y llaves
+//terminal ABREREGALO, CIERRAREGALO, ABREEMPAQUE, CIERRAEMPAQUE, ABREREGALO, CIERRAREGALO
 
-//Terminales binarios
 
-//Terminales aritmeticos
+//Terminales de tipos
+//terminal t_float_santa, t_bool_colacho, t_string_nicolas, t_char_nick, t_arr_noel, t_int_sinterklass;
 
-//Terminales binarios
+//Terminales relacionales
+terminal e_jinglebell, ne_tinseltoes, g_merryberry, l_slinky, ge_snowflake, le_candycane;
+
+//Terminales 
+terminal NAVIDAD, IDENTIFIER, INTEGER_LITERAL, EQ, EQEQ, l_PAPANOEL, BREAK, BOOLEAN, l_float_santa, REGALO, POPURRI, ERROR;
+//terminal PERSONA, NAVIDAD, FINREGALO, ENTREGA;
+
+//Terminales aritmeticos unarios de  decremento e incremento
+terminal QUIEN; //, GRINCH;
+
+//Terminales aritmeticos binarios
+//terminal sum_dasher, res_dancer, mul_prancer, div_vixen, mod_comet;
+
+//Terminales estructuras de control (if, elif, else, for, do, until, return, break)
+//terminal ELFO, HADA, DUENDE, ENVUELVE, HACE, REVISA, ENVIA, CORTA;
+
+//Terminales de lectura y escritura
+//terminal NARRA, ESCUCHA;
+
 /* Non terminals */
 non terminal            expr_list;
 non terminal Integer    expr;      // used to store evaluated subexpressions
@@ -52,11 +70,18 @@ precedence left UMINUS;
 expr_list ::= expr_list expr:e SEMI         {: System.out.println(e);:}
             | expr:e SEMI                   {: System.out.println(e);:}
 ;
-expr      ::= expr:e1 PLUS  expr:e2         {: RESULT = e1+e2;       :}
-             | expr:e1 MINUS expr:e2        {: RESULT = e1-e2;       :}
-             | expr:e1 TIMES expr:e2        {: RESULT = e1*e2;       :}
-             | MINUS expr:e                 {: RESULT = -e;          :}
-  	     %prec UMINUS
-       | LPAREN expr:e RPAREN	         {: RESULT = e;           :}
-       | NUMBER:n	                     {: RESULT = n;           :}
+
+
+expr      ::= expr:e1 PLUS  expr:e2         {: RESULT = e1 + e2;       :}
+             | expr:e1 MINUS expr:e2        {: RESULT = e1 - e2;       :}
+             | expr:e1 TIMES expr:e2        {: RESULT = e1 * e2;       :}
+             | MINUS expr:e                 {: RESULT = -e;            :}
+             %prec UMINUS
+             | LPAREN expr:e RPAREN         {: RESULT = e;             :}
+             | NUMBER:n                     {: RESULT = n;             :}
+             | QUIEN expr:e                 {: RESULT = e - 1;         :}
+             | IDENTIFIER:id               {: 
+
+                                              RESULT = id;             
+                                            :}
              ;

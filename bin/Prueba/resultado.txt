@@ -1,3 +1,20 @@
-Token: 15, Valor: String
-Token: 11, Valor: Salud
-Cantidad de lexemas encontrados: 2
+Token: 16, Valor: abstract
+Token: 17, Valor: carro
+Token: 19, Valor: =
+Token: 25, Valor: 'c'
+Token: 16, Valor: abstract
+Token: 17, Valor: saludo
+Token: 24, Valor: -10.3
+Token: 19, Valor: =
+Token: 27, Valor: "hola"
+Token: 16, Valor: abstract
+Token: 27, Valor: 2cas
+Token: 19, Valor: =
+Token: 18, Valor: 10
+Token: 18, Valor: 5
+Token: 3, Valor: +
+Token: 18, Valor: -3
+Token: 18, Valor: 5
+Token: 12, Valor: >
+Token: 18, Valor: 3
+Cantidad de lexemas encontrados: 19
