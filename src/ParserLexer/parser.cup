@@ -28,11 +28,11 @@ init with {: :};
 scan with {: return lex.next_token(); :};
 
 /* Terminals (tokens returned by the scanner). */
-terminal            SEMI, PLUS, MINUS, TIMES, UMINUS, LPAREN, RPAREN;
+terminal            SEMI, PLUS, MINUS, TIMES, UMINUS;
 terminal Integer    NUMBER;        // our scanner provides numbers as integers
 
 //Terminales de parentesis y llaves
-//terminal ABREREGALO, CIERRAREGALO, ABREEMPAQUE, CIERRAEMPAQUE, ABREREGALO, CIERRAREGALO
+terminal ABREREGALO, CIERRAREGALO, ABREEMPAQUE, CIERRAEMPAQUE, ABRECUENTO, CIERRECUENTO;
 
 
 //Terminales de tipos
@@ -77,7 +77,7 @@ expr      ::= expr:e1 PLUS  expr:e2         {: RESULT = e1 + e2;       :}
              | expr:e1 TIMES expr:e2        {: RESULT = e1 * e2;       :}
              | MINUS expr:e                 {: RESULT = -e;            :}
              %prec UMINUS
-             | LPAREN expr:e RPAREN         {: RESULT = e;             :}
+             | ABRECUENTO expr:e CIERRECUENTO         {: RESULT = e;             :}
              | NUMBER:n                     {: RESULT = n;             :}
              | QUIEN expr:e                 {: RESULT = e - 1;         :}
              | IDENTIFIER:id               {: 

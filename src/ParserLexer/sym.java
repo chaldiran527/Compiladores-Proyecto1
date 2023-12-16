@@ -9,33 +9,37 @@ package ParserLexer;
 public class sym {
   /* terminals */
   public static final int TIMES = 5;
-  public static final int l_PAPANOEL = 21;
+  public static final int CIERRECUENTO = 13;
+  public static final int l_PAPANOEL = 25;
   public static final int PLUS = 3;
-  public static final int RPAREN = 8;
+  public static final int ABRECUENTO = 12;
+  public static final int CIERRAREGALO = 9;
   public static final int SEMI = 2;
-  public static final int REGALO = 25;
-  public static final int IDENTIFIER = 17;
-  public static final int ERROR = 27;
-  public static final int ne_tinseltoes = 11;
-  public static final int LPAREN = 7;
-  public static final int l_slinky = 13;
-  public static final int le_candycane = 15;
-  public static final int BOOLEAN = 23;
+  public static final int REGALO = 29;
+  public static final int IDENTIFIER = 21;
+  public static final int ERROR = 31;
+  public static final int CIERRAEMPAQUE = 11;
+  public static final int ne_tinseltoes = 15;
+  public static final int le_candycane = 19;
+  public static final int l_slinky = 17;
+  public static final int ABREEMPAQUE = 10;
+  public static final int BOOLEAN = 27;
+  public static final int ABREREGALO = 8;
   public static final int EOF = 0;
-  public static final int NUMBER = 9;
-  public static final int POPURRI = 26;
-  public static final int BREAK = 22;
+  public static final int NUMBER = 7;
+  public static final int POPURRI = 30;
+  public static final int BREAK = 26;
   public static final int MINUS = 4;
-  public static final int ge_snowflake = 14;
+  public static final int ge_snowflake = 18;
   public static final int error = 1;
-  public static final int EQ = 19;
-  public static final int INTEGER_LITERAL = 18;
-  public static final int QUIEN = 28;
-  public static final int EQEQ = 20;
-  public static final int e_jinglebell = 10;
-  public static final int l_float_santa = 24;
-  public static final int NAVIDAD = 16;
-  public static final int g_merryberry = 12;
+  public static final int EQ = 23;
+  public static final int INTEGER_LITERAL = 22;
+  public static final int QUIEN = 32;
+  public static final int EQEQ = 24;
+  public static final int e_jinglebell = 14;
+  public static final int l_float_santa = 28;
+  public static final int NAVIDAD = 20;
+  public static final int g_merryberry = 16;
   public static final int UMINUS = 6;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -45,9 +49,13 @@ public class sym {
   "MINUS",
   "TIMES",
   "UMINUS",
-  "LPAREN",
-  "RPAREN",
   "NUMBER",
+  "ABREREGALO",
+  "CIERRAREGALO",
+  "ABREEMPAQUE",
+  "CIERRAEMPAQUE",
+  "ABRECUENTO",
+  "CIERRECUENTO",
   "e_jinglebell",
   "ne_tinseltoes",
   "g_merryberry",

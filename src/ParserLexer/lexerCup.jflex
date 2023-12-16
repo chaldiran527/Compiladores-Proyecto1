@@ -58,12 +58,12 @@ Float = -? (0 | {digitoNoCero} {digito}*) ("." {digito}+)? (("e" | "E") -? {digi
 
 Delimiter = \|
 
-OpenParenthesis = \(
-CloseParenthesis = \(
-OpenBrackets = \[
-CloseBrackets =\]
-OpenBraces = \{
-CloseBraces =\}
+//OpenParenthesis = \(
+//CloseParenthesis = \(
+//OpenBrackets = \[
+//CloseBrackets =\]
+//OpenBraces = \{
+//CloseBraces =\}
 Assignment = \<\=
 
 Not = \!
@@ -121,6 +121,13 @@ Character = \' {InputCharacter} \'
     ">"                            { return symbol(sym.g_merryberry); }
     ">="                           { return symbol(sym.ge_snowflake); }
     "<="                           { return symbol(sym.le_candycane); }
+
+    "("                            { return symbol(sym.ABRECUENTO); }
+    ")"                            { return symbol(sym.CIERRECUENTO); }
+    "["                            { return symbol(sym.ABREEMPAQUE); }
+    "]"                            { return symbol(sym.CIERRAEMPAQUE); }
+    "{"                            { return symbol(sym.ABREREGALO); }
+    "}"                            { return symbol(sym.CIERRAREGALO); }
 
 
     {DecIntegerLiteral}            { return symbol(sym.INTEGER_LITERAL); }

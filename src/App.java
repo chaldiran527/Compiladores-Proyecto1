@@ -61,15 +61,15 @@ public class App {
     }
 
     public static void main(String[] args) throws Exception {
-        // String basePath = System.getProperty("user.dir");
-        // System.out.println("This?");
-        // basePath = basePath + "\\src\\ParserLexer\\lexerCup.jflex";
-        // System.out.println(basePath);
-        //
+        String basePath = System.getProperty("user.dir");
+        //System.out.println("This?");
+        basePath = basePath + "\\src\\ParserLexer\\lexerCup.jflex";
+        //System.out.println(basePath);
+        
         GenerarLexerParser();
 
-        // GenerarBasico();
-        // GenerarPrueba();
+        GenerarBasico();
+        GenerarPrueba();
 
     }
 }
