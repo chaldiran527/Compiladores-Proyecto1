@@ -74,7 +74,7 @@ public class MainJFlexCup {
             if (token.sym != 0) {
                 String tokenInfo = "Token: " + token.sym + ", Valor: " +
                         (token.value == null ? lex.yytext() : token.value.toString());
-                System.out.println(tokenInfo);
+                //System.out.println(tokenInfo);
 
                 // Se escribe la info del token en el archivo
                 writer.write(tokenInfo);

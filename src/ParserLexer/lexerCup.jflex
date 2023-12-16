@@ -58,12 +58,12 @@ Float = -? (0 | {digitoNoCero} {digito}*) ("." {digito}+)? (("e" | "E") -? {digi
 
 Delimiter = \|
 
-//OpenParenthesis = \(
-//CloseParenthesis = \(
-//OpenBrackets = \[
-//CloseBrackets =\]
-//OpenBraces = \{
-//CloseBraces =\}
+OpenParenthesis = \(
+CloseParenthesis = \)
+OpenBrackets = \[
+CloseBrackets =\]
+OpenBraces = \{
+CloseBraces =\}
 Assignment = \<\=
 
 Not = \!
@@ -103,7 +103,7 @@ Character = \' {InputCharacter} \'
     // Identificadores
     {Decrement}                           { return symbol(sym.QUIEN); }
     
-    {Identifier}                   { return symbol(sym.IDENTIFIER); }
+    {Identifier}                   { return symbol(sym.PERSONA); }
 //    \"                             { string.setLength(0); yybegin(STRING);  }
 
     // Comentarios
@@ -132,7 +132,12 @@ Character = \' {InputCharacter} \'
 
     {DecIntegerLiteral}            { return symbol(sym.INTEGER_LITERAL); }
 
-    {Float}                        { return symbol(sym.l_float_santa);}
+    "float"                      { return symbol(sym.SANTA);}
+    "bool"                       { return symbol(sym.COLACHO);}
+    "String"                        { return symbol(sym.NICOLAS);}
+    "char"                        { return symbol(sym.NICK);}
+    "array"                        { return symbol(sym.NOEL);}
+    "int"                        { return symbol(sym.SINTERKLASS);}
     {Character}                    { return symbol(sym.REGALO);} 
 
     // Espacios en blanco
@@ -168,17 +173,17 @@ Character = \' {InputCharacter} \'
     }
 }
 
-<YYINITIAL,ERROR> "*/" {
+<YYINITIAL,ERROR> "_/" {
     // Fin de comentario no encontrado, se intenta recuperar
     yybegin(YYINITIAL);
     yycolumn += 2; // Avanzar dos caracteres para evitar un bucle infinito
     return symbol(sym.ERROR);
 }
 
-<YYINITIAL,ERROR> [^ \t\n\r]* {
-    // Ignorar cualquier otro carácter durante la recuperación
-    yycolumn += yylength();
+<YYINITIAL,ERROR> [^ \t\n\r\"]* {
+    // Ignorar cualquith();
     return symbol(sym.ERROR);
+    yycolumn += yyleng
 }
 
 

@@ -34,15 +34,16 @@ terminal Integer    NUMBER;        // our scanner provides numbers as integers
 //Terminales de parentesis y llaves
 terminal ABREREGALO, CIERRAREGALO, ABREEMPAQUE, CIERRAEMPAQUE, ABRECUENTO, CIERRECUENTO;
 
-
 //Terminales de tipos
-//terminal t_float_santa, t_bool_colacho, t_string_nicolas, t_char_nick, t_arr_noel, t_int_sinterklass;
+terminal t_float_santa, t_bool_colacho, t_string_nicolas, t_char_nick, t_arr_noel, t_int_sinterklass;
+
+terminal SANTA, COLACHO, NICOLAS, NICK, NOEL, SINTERKLASS;
 
 //Terminales relacionales
 terminal e_jinglebell, ne_tinseltoes, g_merryberry, l_slinky, ge_snowflake, le_candycane;
 
 //Terminales 
-terminal NAVIDAD, IDENTIFIER, INTEGER_LITERAL, EQ, EQEQ, l_PAPANOEL, BREAK, BOOLEAN, l_float_santa, REGALO, POPURRI, ERROR;
+terminal NAVIDAD, PERSONA, INTEGER_LITERAL, EQ, EQEQ, l_PAPANOEL, BREAK, BOOLEAN, l_float_santa, REGALO, POPURRI, ERROR;
 //terminal PERSONA, NAVIDAD, FINREGALO, ENTREGA;
 
 //Terminales aritmeticos unarios de  decremento e incremento
@@ -80,7 +81,7 @@ expr      ::= expr:e1 PLUS  expr:e2         {: RESULT = e1 + e2;       :}
              | ABRECUENTO expr:e CIERRECUENTO         {: RESULT = e;             :}
              | NUMBER:n                     {: RESULT = n;             :}
              | QUIEN expr:e                 {: RESULT = e - 1;         :}
-             | IDENTIFIER:id               {: 
+             | PERSONA:id               {: 
 
                                               RESULT = id;             
                                             :}
