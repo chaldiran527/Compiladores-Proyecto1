@@ -8,76 +8,64 @@ package ParserLexer;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int le_candycane = 28;
-  public static final int mod_comet = 44;
-  public static final int and_melchior = 47;
-  public static final int UMINUS = 6;
-  public static final int FINREGALO = 36;
-  public static final int SEPARAREGALO = 14;
-  public static final int HADA = 50;
-  public static final int PERSONA = 29;
-  public static final int DUENDE = 51;
-  public static final int SEMI = 2;
-  public static final int CIERRECUENTO = 13;
-  public static final int t_bool_colacho = 16;
-  public static final int ENTREGA = 33;
-  public static final int MINUS = 4;
-  public static final int CIERRAREGALO = 9;
-  public static final int l_int_dedmoroz = 19;
-  public static final int g_merryberry = 25;
-  public static final int or_balthassar = 48;
-  public static final int ABREEMPAQUE = 10;
-  public static final int t_char_nick = 18;
-  public static final int CIERRAEMPAQUE = 11;
-  public static final int NAVIDAD = 30;
-  public static final int pow_cupid = 45;
-  public static final int div_int_vixen = 42;
-  public static final int NARRA = 59;
-  public static final int t_float_santa = 15;
-  public static final int REGALO = 34;
-  public static final int PLUS = 3;
-  public static final int HACE = 53;
-  public static final int ENVUELVE = 52;
-  public static final int not_gaspar = 46;
-  public static final int mul_prancer = 41;
-  public static final int t_arr_noel = 20;
-  public static final int GRINCH = 38;
+  public static final int le_candycane = 22;
+  public static final int mod_comet = 31;
+  public static final int and_melchior = 34;
+  public static final int FINREGALO = 23;
+  public static final int SEPARAREGALO = 8;
+  public static final int HADA = 37;
+  public static final int PERSONA = 46;
+  public static final int DUENDE = 38;
+  public static final int CIERRECUENTO = 7;
+  public static final int t_bool_colacho = 10;
+  public static final int ENTREGA = 50;
+  public static final int CIERRAREGALO = 3;
+  public static final int l_int_dedmoroz = 13;
+  public static final int g_merryberry = 19;
+  public static final int or_balthassar = 35;
+  public static final int ABREEMPAQUE = 4;
+  public static final int t_char_nick = 12;
+  public static final int CIERRAEMPAQUE = 5;
+  public static final int NAVIDAD = 47;
+  public static final int div_int_vixen = 29;
+  public static final int pow_cupid = 32;
+  public static final int NARRA = 53;
+  public static final int t_float_santa = 9;
+  public static final int REGALO = 51;
+  public static final int HACE = 40;
+  public static final int ENVUELVE = 39;
+  public static final int not_gaspar = 33;
+  public static final int mul_prancer = 28;
+  public static final int t_arr_noel = 14;
+  public static final int GRINCH = 25;
   public static final int EOF = 0;
-  public static final int TRINEO = 58;
-  public static final int CORTA = 56;
-  public static final int REVISA = 54;
-  public static final int res_dancer = 40;
+  public static final int TRINEO = 45;
+  public static final int CORTA = 43;
+  public static final int REVISA = 41;
   public static final int error = 1;
-  public static final int ABRECUENTO = 12;
-  public static final int sum_dasher = 39;
-  public static final int NUMBER = 7;
-  public static final int l_float_padrenavidad = 22;
-  public static final int ESCUCHA = 60;
-  public static final int ABREREGALO = 8;
-  public static final int ERROR = 35;
-  public static final int l_slinky = 26;
-  public static final int ENVIA = 55;
-  public static final int TIMES = 5;
-  public static final int e_jinglebell = 23;
-  public static final int t_string_nicolas = 17;
-  public static final int ge_snowflake = 27;
-  public static final int t_int_sinterklass = 21;
-  public static final int ELFO = 49;
-  public static final int ne_tinseltoes = 24;
-  public static final int QUIEN = 37;
-  public static final int ESPERARASANTA = 57;
-  public static final int div_float_blitzen = 43;
-  public static final int INTEGER_LITERAL = 32;
-  public static final int IDENTIFIER = 31;
+  public static final int res_dancer = 27;
+  public static final int ABRECUENTO = 6;
+  public static final int sum_dasher = 26;
+  public static final int l_float_padrenavidad = 16;
+  public static final int ESCUCHA = 54;
+  public static final int ABREREGALO = 2;
+  public static final int ERROR = 52;
+  public static final int l_slinky = 20;
+  public static final int ENVIA = 42;
+  public static final int e_jinglebell = 17;
+  public static final int t_string_nicolas = 11;
+  public static final int ge_snowflake = 21;
+  public static final int t_int_sinterklass = 15;
+  public static final int ELFO = 36;
+  public static final int ne_tinseltoes = 18;
+  public static final int QUIEN = 24;
+  public static final int ESPERARASANTA = 44;
+  public static final int div_float_blitzen = 30;
+  public static final int INTEGER_LITERAL = 49;
+  public static final int IDENTIFIER = 48;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
-  "SEMI",
-  "PLUS",
-  "MINUS",
-  "TIMES",
-  "UMINUS",
-  "NUMBER",
   "ABREREGALO",
   "CIERRAREGALO",
   "ABREEMPAQUE",
@@ -99,13 +87,6 @@ public class sym {
   "l_slinky",
   "ge_snowflake",
   "le_candycane",
-  "PERSONA",
-  "NAVIDAD",
-  "IDENTIFIER",
-  "INTEGER_LITERAL",
-  "ENTREGA",
-  "REGALO",
-  "ERROR",
   "FINREGALO",
   "QUIEN",
   "GRINCH",
@@ -129,6 +110,13 @@ public class sym {
   "CORTA",
   "ESPERARASANTA",
   "TRINEO",
+  "PERSONA",
+  "NAVIDAD",
+  "IDENTIFIER",
+  "INTEGER_LITERAL",
+  "ENTREGA",
+  "REGALO",
+  "ERROR",
   "NARRA",
   "ESCUCHA"
   };

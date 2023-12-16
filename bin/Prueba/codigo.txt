@@ -1,19 +1,13 @@
 abstract carro <= 'c' @ Comentario de una sola linea
 -10.3 <= "hola" 
-abstract 2cas = 10 |
+abstract 2cas <= 10 |
 --var
 ++var
 5 + -3 
 5 > 3
-"Hola"
-
-543
-
-int 3
-
-/_ Comentario multilinea correcto
-    Felices 
-    Fiestas
-_/
+( )
+{ }
+[ ]
+if
 
 /_ Comentario multilinea incorrecto

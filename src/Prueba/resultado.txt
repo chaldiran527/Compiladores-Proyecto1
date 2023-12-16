@@ -1,31 +1,61 @@
-Token: 30, Valor: abstract
-Token: 31, Valor: carro
-Token: 33, Valor: <=
-Token: 34, Valor: 'c'
-Token: 22, Valor: -10.3
-Token: 33, Valor: <=
-Token: 17, Valor: "hola"
-Token: 30, Valor: abstract
-Token: 35, Valor: 2cas
-Token: 35, Valor: =
-Token: 22, Valor: 10
-Token: 36, Valor: |
-Token: 37, Valor: --
-Token: 31, Valor: var
-Token: 38, Valor: ++
-Token: 31, Valor: var
-Token: 22, Valor: 5
-Token: 39, Valor: +
-Token: 22, Valor: -3
-Token: 22, Valor: 5
-Token: 25, Valor: >
-Token: 22, Valor: 3
-Token: 12, Valor: (
-Token: 13, Valor: )
-Token: 8, Valor: {
-Token: 9, Valor: }
-Token: 10, Valor: [
-Token: 11, Valor: ]
-Token: 49, Valor: if
-Token: 35, Valor: /_ Comentario multilinea incorrecto
+Codigo Token: 47, Nombre Token: NAVIDAD, Valor: abstract, Linea: 1, Columna: 1
+
+Codigo Token: 48, Nombre Token: IDENTIFIER, Valor: carro, Linea: 1, Columna: 10
+
+Codigo Token: 50, Nombre Token: ENTREGA, Valor: <=, Linea: 1, Columna: 16
+
+Codigo Token: 51, Nombre Token: REGALO, Valor: 'c', Linea: 1, Columna: 19
+
+Codigo Token: 16, Nombre Token: l_float_padrenavidad, Valor: -10.3, Linea: 2, Columna: 1
+
+Codigo Token: 50, Nombre Token: ENTREGA, Valor: <=, Linea: 2, Columna: 7
+
+Codigo Token: 11, Nombre Token: t_string_nicolas, Valor: "hola", Linea: 2, Columna: 15
+
+Codigo Token: 47, Nombre Token: NAVIDAD, Valor: abstract, Linea: 3, Columna: 1
+
+Codigo Token: 52, Nombre Token: ERROR, Valor: 2cas, Linea: 3, Columna: 14
+
+Codigo Token: 50, Nombre Token: ENTREGA, Valor: <=, Linea: 3, Columna: 19
+
+Codigo Token: 16, Nombre Token: l_float_padrenavidad, Valor: 10, Linea: 3, Columna: 22
+
+Codigo Token: 23, Nombre Token: FINREGALO, Valor: |, Linea: 3, Columna: 25
+
+Codigo Token: 24, Nombre Token: QUIEN, Valor: --, Linea: 4, Columna: 1
+
+Codigo Token: 48, Nombre Token: IDENTIFIER, Valor: var, Linea: 4, Columna: 3
+
+Codigo Token: 25, Nombre Token: GRINCH, Valor: ++, Linea: 5, Columna: 1
+
+Codigo Token: 48, Nombre Token: IDENTIFIER, Valor: var, Linea: 5, Columna: 3
+
+Codigo Token: 16, Nombre Token: l_float_padrenavidad, Valor: 5, Linea: 6, Columna: 1
+
+Codigo Token: 26, Nombre Token: sum_dasher, Valor: +, Linea: 6, Columna: 3
+
+Codigo Token: 16, Nombre Token: l_float_padrenavidad, Valor: -3, Linea: 6, Columna: 5
+
+Codigo Token: 16, Nombre Token: l_float_padrenavidad, Valor: 5, Linea: 7, Columna: 1
+
+Codigo Token: 19, Nombre Token: g_merryberry, Valor: >, Linea: 7, Columna: 3
+
+Codigo Token: 16, Nombre Token: l_float_padrenavidad, Valor: 3, Linea: 7, Columna: 5
+
+Codigo Token: 6, Nombre Token: ABRECUENTO, Valor: (, Linea: 8, Columna: 1
+
+Codigo Token: 7, Nombre Token: CIERRECUENTO, Valor: ), Linea: 8, Columna: 3
+
+Codigo Token: 2, Nombre Token: ABREREGALO, Valor: {, Linea: 9, Columna: 1
+
+Codigo Token: 3, Nombre Token: CIERRAREGALO, Valor: }, Linea: 9, Columna: 3
+
+Codigo Token: 4, Nombre Token: ABREEMPAQUE, Valor: [, Linea: 10, Columna: 1
+
+Codigo Token: 5, Nombre Token: CIERRAEMPAQUE, Valor: ], Linea: 10, Columna: 3
+
+Codigo Token: 36, Nombre Token: ELFO, Valor: if, Linea: 11, Columna: 1
+
+Codigo Token: 52, Nombre Token: ERROR, Valor: /_ Comentario multilinea incorrecto, Linea: 13, Columna: 1
+
 Cantidad de lexemas encontrados: 30

@@ -2,6 +2,7 @@
 package ParserLexer;
 import java_cup.runtime.*;
 
+//Acciones predefinidas por el codigo proporcionado en la pagina de CUP
 action code {:
     public void hola(){
         System.out.println("Hola");
@@ -17,19 +18,15 @@ parser code {:
     BasicLexerCupV lex;
 
     @SupressWarnings("deprecation")
-    public parser(BasicLexerCupV lex){
+    public parser(LexerCup lex){
         this.lex = lex;
         this.symbolFactory = new DefaultSymbolFactory();
     }
 :}
 
-/* define how to connect to the scanner! */
+/* Se define la manera en que se conecta al scanner */
 init with {: :};
 scan with {: return lex.next_token(); :};
-
-/* Terminals (tokens returned by the scanner). */
-terminal            SEMI, PLUS, MINUS, TIMES, UMINUS;
-terminal Integer    NUMBER;        // our scanner provides numbers as integers
 
 //Terminales de parentesis y llaves
 terminal ABREREGALO, CIERRAREGALO, ABREEMPAQUE, CIERRAEMPAQUE, ABRECUENTO, CIERRECUENTO, SEPARAREGALO;
@@ -40,12 +37,8 @@ terminal t_float_santa, t_bool_colacho, t_string_nicolas, t_char_nick, l_int_ded
 //Terminales relacionales
 terminal e_jinglebell, ne_tinseltoes, g_merryberry, l_slinky, ge_snowflake, le_candycane;
 
-//Terminales 
-terminal PERSONA, NAVIDAD, IDENTIFIER, INTEGER_LITERAL, ENTREGA, REGALO, ERROR;
-
 //Terminal de finalizador
 terminal FINREGALO;
-//terminal PERSONA, NAVIDAD, FINREGALO, ENTREGA;
 
 //Terminales aritmeticos unarios de  decremento e incremento
 terminal QUIEN, GRINCH;
@@ -59,14 +52,14 @@ terminal not_gaspar, and_melchior, or_balthassar;
 //Terminales estructuras de control (if, elif, else, for, do, until, return, break, while, switch)
 terminal ELFO, HADA, DUENDE, ENVUELVE, HACE, REVISA, ENVIA, CORTA, ESPERARASANTA, TRINEO;
 
+//Terminales de identificador, entrega y ERROR
+terminal PERSONA, NAVIDAD, IDENTIFIER, INTEGER_LITERAL, ENTREGA, REGALO, ERROR;
+
+
 //Terminales de lectura y escritura
 terminal NARRA, ESCUCHA;
 
-/* Non terminals */
-//non terminal            expr_list;
-//non terminal Integer    expr;      // used to store evaluated subexpressions
-
-
+/* No terminal */
 non terminal felizNavidad; 
 start with felizNavidad;
 

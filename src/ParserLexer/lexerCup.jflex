@@ -1,9 +1,10 @@
+/* https://www.jflex.de/manual.html */
 /* JFlex example: partial Java language lexer specification */
 package ParserLexer;
 import java.io.StringReader;
 import java_cup.runtime.*;
 
-/* Options and declarations */
+/*Declaraciones y opciones*/
 %%
 
 %class Lexer
@@ -14,9 +15,11 @@ import java_cup.runtime.*;
 %column
 
 %{
+    //Variable string para imprimir los contenidos de los tokens encontrados
     StringBuffer string = new StringBuffer();
     private int errorCount = 0;
 
+    //Definicion de symbol predefinidos por el ejemplo proporcionado por jflex
     private Symbol symbol(int type) {
         return new Symbol(type, yyline, yycolumn);
     }
@@ -25,36 +28,33 @@ import java_cup.runtime.*;
         return new Symbol(type, yyline, yycolumn, value);
     }
 
-    // Método para manejar errores y recuperación
+    //Método para manejar errores y recuperación
     private void handleError(String message) {
         System.err.println("Error: " + message + " en la línea " + yyline + ", columna " + yycolumn);
         errorCount++;
-        // Puedes agregar más lógica de recuperación aquí si es necesario
-        // Por ejemplo, puedes avanzar al siguiente ';' o '}' si el error ocurre dentro de una expresión o bloque.
-        // También puedes ignorar caracteres hasta encontrar un punto seguro para continuar.
     }
 %}
 
+//Se definen las expresiones para espacios en blanco, caracteres y finalizadores de linea
 LineTerminator = \r|\n|\r\n
 InputCharacter = [^\r\n]
 WhiteSpace     = {LineTerminator} | [ \t\f]
 
-/* commentarios */
-Comment = {TraditionalComment} | {EndOfLineComment} | {DocumentationComment}
+/* Se definen las expresiones para commentarios */
+Comment = {TraditionalComment} | {EndOfLineComment}
 
 TraditionalComment   = "/\_" [^\_] ~"\_/" | "/\_" "\_"+ "/"
 TraditionalCommentError = "/_" [^\_]* 
 EndOfLineComment     = "@" {InputCharacter}* {LineTerminator}?
-DocumentationComment = "/**" {CommentContent} "*"+ "/"
 CommentContent       =  ([^\_] | \_+ [^/\_])*
 
+//Se define el regex del identificador 
 Identifier = [:jletter:] [:jletterdigit:]*
 
 //SE DEFINEN LAS EXPRESIONES NUMERICAS
 digito = [0-9]
 digitoNoCero = [1-9]
 DecIntegerLiteral =  0 | -?[1-9]{digito}* 
-
 Float = -? (0 | {digitoNoCero} {digito}*) ("." {digito}+)? (("e" | "E") -? {digito}+)?
 
 //Operadores de asignacion, booleanos y finalizacion
@@ -79,7 +79,7 @@ Mod = \~
 Comma = \,
 Character = \' {InputCharacter} \'
 
-/* Lexical rules */
+/* Reglas y estados lexicos */
 %state STRING
 %state ERROR
 %state DECREMENT
@@ -111,15 +111,14 @@ Character = \' {InputCharacter} \'
 
 
 <YYINITIAL> {
-
-   // Espacios en blanco
+   // Espacios en blanco no se retornan
     {WhiteSpace}                   { /* ignore */ }
 
-    // Comentarios
+    // Comentarios no se retorna
     {Comment}                      { /* ignore */ }
     \"                             {string.setLength(0); yybegin(STRING); }
 
-    //Comentario multilinea sin finalizacion "_/"
+    //Comentario multilinea sin finalizacion "_/" que se retorna por ser error
     {TraditionalCommentError}      { return symbol(sym.ERROR);}
     \"                             {string.setLength(0); yybegin(STRING); }
 
@@ -178,7 +177,7 @@ Character = \' {InputCharacter} \'
  
 
     //Cualquier otro carácter no reconocido
-    .                              {return symbol(sym.ERROR);}//{ handleError("Carácter no reconocido"); }
+    .                              {return symbol(sym.ERROR);}
 }
 
 
@@ -208,6 +207,7 @@ Character = \' {InputCharacter} \'
     }
 }
 
+
 <YYINITIAL,ERROR> "_/" {
     // Fin de comentario no encontrado, se intenta recuperar
     yybegin(YYINITIAL);
@@ -220,13 +220,11 @@ Character = \' {InputCharacter} \'
     // Ignorar cualquier otro carácter durante la recuperación
     yycolumn += yylength();
     return symbol(sym.ERROR);
-    yycolumn += yyleng
 }
 
 
-/* error fallback */
+/* error fallback en caso de encontrar un caracter no reconocido*/
 [^]                              { 
-                                    //handleError("Carácter no reconocido");
                                     yycolumn++;
                                     return symbol(sym.ERROR);
                                 }
