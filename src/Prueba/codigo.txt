@@ -1,6 +1,8 @@
-abstract carro = 'c' @ Comentario de una sola linea
-abstract saludo -10.3 = "hola" 
-abstract 2cas = 10
+abstract carro <= 'c' @ Comentario de una sola linea
+-10.3 <= "hola" 
+abstract 2cas = 10 |
+--var
+++var
 5 + -3 
 5 > 3
 ( )
@@ -8,8 +10,9 @@ abstract 2cas = 10
 [ ]
 if
 
-/_ Comentario multilinea
- 1asd2
- "String" @ Dasdasd
- Salud
+/_ Comentario multilinea correcto
+    Felices 
+    Fiestas
 _/
+
+/_ Comentario multilinea incorrecto

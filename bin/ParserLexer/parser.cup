@@ -32,56 +32,47 @@ terminal            SEMI, PLUS, MINUS, TIMES, UMINUS;
 terminal Integer    NUMBER;        // our scanner provides numbers as integers
 
 //Terminales de parentesis y llaves
-terminal ABREREGALO, CIERRAREGALO, ABREEMPAQUE, CIERRAEMPAQUE, ABRECUENTO, CIERRECUENTO;
+terminal ABREREGALO, CIERRAREGALO, ABREEMPAQUE, CIERRAEMPAQUE, ABRECUENTO, CIERRECUENTO, SEPARAREGALO;
 
 
 //Terminales de tipos
-//terminal t_float_santa, t_bool_colacho, t_string_nicolas, t_char_nick, t_arr_noel, t_int_sinterklass;
+terminal t_float_santa, t_bool_colacho, t_string_nicolas, t_char_nick, l_int_dedmoroz, t_arr_noel, t_int_sinterklass, l_float_padrenavidad;
 
 //Terminales relacionales
 terminal e_jinglebell, ne_tinseltoes, g_merryberry, l_slinky, ge_snowflake, le_candycane;
 
 //Terminales 
-terminal NAVIDAD, IDENTIFIER, INTEGER_LITERAL, EQ, EQEQ, l_PAPANOEL, BREAK, BOOLEAN, l_float_santa, REGALO, POPURRI, ERROR;
+terminal PERSONA, NAVIDAD, IDENTIFIER, INTEGER_LITERAL, ENTREGA, REGALO, ERROR;
+
+//Terminal de finalizador
+terminal FINREGALO;
 //terminal PERSONA, NAVIDAD, FINREGALO, ENTREGA;
 
 //Terminales aritmeticos unarios de  decremento e incremento
-terminal QUIEN; //, GRINCH;
+terminal QUIEN, GRINCH;
 
 //Terminales aritmeticos binarios
-//terminal sum_dasher, res_dancer, mul_prancer, div_vixen, mod_comet;
+terminal sum_dasher, res_dancer, mul_prancer, div_int_vixen, div_float_blitzen, mod_comet, pow_cupid;
 
-//Terminales estructuras de control (if, elif, else, for, do, until, return, break)
-//terminal ELFO, HADA, DUENDE, ENVUELVE, HACE, REVISA, ENVIA, CORTA;
+//Terminales operadores logicos
+terminal not_gaspar, and_melchior, or_balthassar;
+
+//Terminales estructuras de control (if, elif, else, for, do, until, return, break, while, switch)
+terminal ELFO, HADA, DUENDE, ENVUELVE, HACE, REVISA, ENVIA, CORTA, ESPERARASANTA, TRINEO;
 
 //Terminales de lectura y escritura
-//terminal NARRA, ESCUCHA;
+terminal NARRA, ESCUCHA;
 
 /* Non terminals */
-non terminal            expr_list;
-non terminal Integer    expr;      // used to store evaluated subexpressions
-
-/* Precedences */
-precedence left PLUS, MINUS;
-precedence left TIMES;
-precedence left UMINUS;
-
-/* The grammar rules */
-expr_list ::= expr_list expr:e SEMI         {: System.out.println(e);:}
-            | expr:e SEMI                   {: System.out.println(e);:}
-;
+//non terminal            expr_list;
+//non terminal Integer    expr;      // used to store evaluated subexpressions
 
 
-expr      ::= expr:e1 PLUS  expr:e2         {: RESULT = e1 + e2;       :}
-             | expr:e1 MINUS expr:e2        {: RESULT = e1 - e2;       :}
-             | expr:e1 TIMES expr:e2        {: RESULT = e1 * e2;       :}
-             | MINUS expr:e                 {: RESULT = -e;            :}
-             %prec UMINUS
-             | ABRECUENTO expr:e CIERRECUENTO         {: RESULT = e;             :}
-             | NUMBER:n                     {: RESULT = n;             :}
-             | QUIEN expr:e                 {: RESULT = e - 1;         :}
-             | IDENTIFIER:id               {: 
+non terminal felizNavidad; 
+start with felizNavidad;
 
-                                              RESULT = id;             
-                                            :}
-             ;
+felizNavidad ::= {: 
+                    hola(); :} 
+                PERSONA 
+                {: 
+                    adios(); :};

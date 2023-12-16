@@ -1,21 +1,24 @@
-Token: 20, Valor: abstract
-Token: 21, Valor: carro
-Token: 23, Valor: =
-Token: 29, Valor: 'c'
-Token: 20, Valor: abstract
-Token: 21, Valor: saludo
-Token: 28, Valor: -10.3
-Token: 23, Valor: =
-Token: 31, Valor: "hola"
-Token: 20, Valor: abstract
-Token: 31, Valor: 2cas
-Token: 23, Valor: =
+Token: 30, Valor: abstract
+Token: 31, Valor: carro
+Token: 33, Valor: <=
+Token: 34, Valor: 'c'
+Token: 22, Valor: -10.3
+Token: 33, Valor: <=
+Token: 17, Valor: "hola"
+Token: 30, Valor: abstract
+Token: 35, Valor: 2cas
+Token: 35, Valor: =
 Token: 22, Valor: 10
+Token: 36, Valor: |
+Token: 37, Valor: --
+Token: 31, Valor: var
+Token: 38, Valor: ++
+Token: 31, Valor: var
 Token: 22, Valor: 5
-Token: 3, Valor: +
+Token: 39, Valor: +
 Token: 22, Valor: -3
 Token: 22, Valor: 5
-Token: 16, Valor: >
+Token: 25, Valor: >
 Token: 22, Valor: 3
 Token: 12, Valor: (
 Token: 13, Valor: )
@@ -23,5 +26,6 @@ Token: 8, Valor: {
 Token: 9, Valor: }
 Token: 10, Valor: [
 Token: 11, Valor: ]
-Token: 21, Valor: if
-Cantidad de lexemas encontrados: 26
+Token: 49, Valor: if
+Token: 35, Valor: /_ Comentario multilinea incorrecto
+Cantidad de lexemas encontrados: 30

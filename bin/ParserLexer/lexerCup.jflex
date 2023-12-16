@@ -43,35 +43,28 @@ WhiteSpace     = {LineTerminator} | [ \t\f]
 Comment = {TraditionalComment} | {EndOfLineComment} | {DocumentationComment}
 
 TraditionalComment   = "/\_" [^\_] ~"\_/" | "/\_" "\_"+ "/"
+TraditionalCommentError = "/_" [^\_]* 
 EndOfLineComment     = "@" {InputCharacter}* {LineTerminator}?
 DocumentationComment = "/**" {CommentContent} "*"+ "/"
 CommentContent       =  ([^\_] | \_+ [^/\_])*
 
 Identifier = [:jletter:] [:jletterdigit:]*
 
-//DEFINIR LAS EXPRESIONES 
+//SE DEFINEN LAS EXPRESIONES NUMERICAS
 digito = [0-9]
 digitoNoCero = [1-9]
-DecIntegerLiteral = (-?{digitoNoCero} {digito}*)
+DecIntegerLiteral =  0 | -?[1-9]{digito}* 
 
 Float = -? (0 | {digitoNoCero} {digito}*) ("." {digito}+)? (("e" | "E") -? {digito}+)?
 
+//Operadores de asignacion, booleanos y finalizacion
 Delimiter = \|
-
-//OpenParenthesis = \(
-//CloseParenthesis = \(
-//OpenBrackets = \[
-//CloseBrackets =\]
-//OpenBraces = \{
-//CloseBraces =\}
 Assignment = \<\=
-
 Not = \!
 And =  \^
 Or = \#
 
-//Operadores Aritmeticos
-
+//Operadores Aritmeticos unarios y binarios
 Decrement = \-\-
 Increment = \+\+
 Addition = \+
@@ -82,46 +75,55 @@ Power = \*\*
 Product = \*
 Mod = \~
 
+//Coma y caracter
 Comma = \,
 Character = \' {InputCharacter} \'
 
 /* Lexical rules */
 %state STRING
 %state ERROR
+%state DECREMENT
 
 %%
 
 
-/* keywords */
+/* Palabras reservadas */
 <YYINITIAL> "abstract"           { return symbol(sym.NAVIDAD); }
-<YYINITIAL> "boolean"            { return symbol(sym.BOOLEAN); }
-<YYINITIAL> "break"              { return symbol(sym.BREAK); }
+<YYINITIAL> "if"                 { return symbol(sym.ELFO); }
+<YYINITIAL> "elif"               { return symbol(sym.HADA); }
+<YYINITIAL> "else"               { return symbol(sym.DUENDE); }
+<YYINITIAL> "for"                { return symbol(sym.ENVUELVE); }
+<YYINITIAL> "while"              { return symbol(sym.ESPERARASANTA); }
+<YYINITIAL> "do"                 { return symbol(sym.HACE); }
+<YYINITIAL> "until"              { return symbol(sym.REVISA); }
+<YYINITIAL> "switch"             { return symbol(sym.TRINEO); }
+<YYINITIAL> "return"             { return symbol(sym.ENVIA); }
+<YYINITIAL> "break"              { return symbol(sym.CORTA); }
+<YYINITIAL> "print"              { return symbol(sym.NARRA); }
+<YYINITIAL> "read"               { return symbol(sym.ESCUCHA); }
+<YYINITIAL> "float"              { return symbol(sym.t_float_santa); }
+<YYINITIAL> "boolean"            { return symbol(sym.t_bool_colacho); }
+<YYINITIAL> "str"                { return symbol(sym.t_string_nicolas); }
+<YYINITIAL> "char"               { return symbol(sym.t_char_nick); }
+<YYINITIAL> "arr"                { return symbol(sym.t_arr_noel); }
+<YYINITIAL> "int"                { return symbol(sym.t_int_sinterklass); }
+
 
 
 <YYINITIAL> {
 
-    // Identificadores
-    {Decrement}                           { return symbol(sym.QUIEN); }
-    
-    {Identifier}                   { return symbol(sym.IDENTIFIER); }
-//    \"                             { string.setLength(0); yybegin(STRING);  }
+   // Espacios en blanco
+    {WhiteSpace}                   { /* ignore */ }
 
     // Comentarios
     {Comment}                      { /* ignore */ }
     \"                             {string.setLength(0); yybegin(STRING); }
 
+    //Comentario multilinea sin finalizacion "_/"
+    {TraditionalCommentError}      { return symbol(sym.ERROR);}
+    \"                             {string.setLength(0); yybegin(STRING); }
 
-
-    // Operadores y otros tokens
-    "="                            { return symbol(sym.EQ); }
-    "=="                           { return symbol(sym.e_jinglebell); }
-    "+"                            { return symbol(sym.PLUS); }
-    "!="                           { return symbol(sym.ne_tinseltoes); }
-    "<"                            { return symbol(sym.l_slinky); }
-    ">"                            { return symbol(sym.g_merryberry); }
-    ">="                           { return symbol(sym.ge_snowflake); }
-    "<="                           { return symbol(sym.le_candycane); }
-
+    //Se evalua retornan los tipos de parentesis
     "("                            { return symbol(sym.ABRECUENTO); }
     ")"                            { return symbol(sym.CIERRECUENTO); }
     "["                            { return symbol(sym.ABREEMPAQUE); }
@@ -130,21 +132,59 @@ Character = \' {InputCharacter} \'
     "}"                            { return symbol(sym.CIERRAREGALO); }
 
 
-    {DecIntegerLiteral}            { return symbol(sym.INTEGER_LITERAL); }
 
-    {Float}                        { return symbol(sym.l_float_santa);}
+    //Operadores aritmeticos unarios  
+    {Decrement}                    { return symbol(sym.QUIEN); }   
+    {Increment}                    { return symbol(sym.GRINCH); } 
+
+
+    //Operadores booleanos 
+    {And}                     { return symbol(sym.and_melchior); }
+    {Or}                     { return symbol(sym.or_balthassar); }
+    {Not}                     { return symbol(sym.not_gaspar); }
+
+    //Operadores aritmeticos binarios
+    {Addition}                     { return symbol(sym.sum_dasher); }
+    {Substraction}                 { return symbol(sym.res_dancer); }
+    {Product}                      { return symbol(sym.mul_prancer); }
+    {DivisionInteger}              { return symbol(sym.div_int_vixen); }
+    {DivisionFloat}              { return symbol(sym.div_float_blitzen); }
+    {Mod}                          { return symbol(sym.mod_comet); }
+    {Power}                          { return symbol(sym.pow_cupid); }
+
+    //Operador de coma para separar elementos 
+    {Comma}                        { return symbol(sym.SEPARAREGALO); }
+    
+    // Operadores de asignacion y comparacion 
+    {Assignment}                   { return symbol(sym.ENTREGA); }
+    "=="                           { return symbol(sym.e_jinglebell); }
+    "!="                           { return symbol(sym.ne_tinseltoes); }
+    "<"                            { return symbol(sym.l_slinky); }
+    ">"                            { return symbol(sym.g_merryberry); }
+    ">="                           { return symbol(sym.ge_snowflake); }
+    "<="                           { return symbol(sym.le_candycane); }
+
+
+    //Delimitador de expresiones
+    {Delimiter}                    { return symbol(sym.FINREGALO); }
+    
+    //Identificador para variables
+    {Identifier}                   { return symbol(sym.IDENTIFIER); }
+
+    //Tipos de datos literales
     {Character}                    { return symbol(sym.REGALO);} 
+    {Float}                        { return symbol(sym.l_float_padrenavidad);}
+    {DecIntegerLiteral}            { return symbol(sym.l_int_dedmoroz); }
+ 
 
-    // Espacios en blanco
-    {WhiteSpace}                   { /* ignore */ }
-
-    // Cualquier otro carácter no reconocido
-    .                              { handleError("Carácter no reconocido"); }
+    //Cualquier otro carácter no reconocido
+    .                              {return symbol(sym.ERROR);}//{ handleError("Carácter no reconocido"); }
 }
+
 
 <STRING> {
     \"                             { yybegin(YYINITIAL); 
-                                    return symbol(sym.l_PAPANOEL, 
+                                    return symbol(sym.t_string_nicolas, 
                                     ("\"" + string.toString() + "\"")); }
 
     [^\n\r\"\\]                   { string.append( yytext() ); }
@@ -168,14 +208,16 @@ Character = \' {InputCharacter} \'
     }
 }
 
-<YYINITIAL,ERROR> "*/" {
+
+<YYINITIAL,ERROR> "_/" {
     // Fin de comentario no encontrado, se intenta recuperar
     yybegin(YYINITIAL);
     yycolumn += 2; // Avanzar dos caracteres para evitar un bucle infinito
     return symbol(sym.ERROR);
 }
 
-<YYINITIAL,ERROR> [^ \t\n\r]* {
+
+<YYINITIAL,ERROR> [^ \t\n\r\"\-\+]* {
     // Ignorar cualquier otro carácter durante la recuperación
     yycolumn += yylength();
     return symbol(sym.ERROR);
@@ -184,7 +226,7 @@ Character = \' {InputCharacter} \'
 
 /* error fallback */
 [^]                              { 
-                                    handleError("Carácter no reconocido");
+                                    //handleError("Carácter no reconocido");
                                     yycolumn++;
                                     return symbol(sym.ERROR);
                                 }
