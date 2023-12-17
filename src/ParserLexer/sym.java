@@ -18,7 +18,7 @@ public class sym {
   public static final int DUENDE = 38;
   public static final int CIERRECUENTO = 7;
   public static final int t_bool_colacho = 10;
-  public static final int ENTREGA = 50;
+  public static final int ENTREGA = 49;
   public static final int CIERRAREGALO = 3;
   public static final int l_int_dedmoroz = 13;
   public static final int g_merryberry = 19;
@@ -29,9 +29,9 @@ public class sym {
   public static final int NAVIDAD = 47;
   public static final int div_int_vixen = 29;
   public static final int pow_cupid = 32;
-  public static final int NARRA = 53;
+  public static final int NARRA = 52;
   public static final int t_float_santa = 9;
-  public static final int REGALO = 51;
+  public static final int REGALO = 50;
   public static final int HACE = 40;
   public static final int ENVUELVE = 39;
   public static final int not_gaspar = 33;
@@ -47,9 +47,9 @@ public class sym {
   public static final int ABRECUENTO = 6;
   public static final int sum_dasher = 26;
   public static final int l_float_padrenavidad = 16;
-  public static final int ESCUCHA = 54;
+  public static final int ESCUCHA = 53;
   public static final int ABREREGALO = 2;
-  public static final int ERROR = 52;
+  public static final int ERROR = 51;
   public static final int l_slinky = 20;
   public static final int ENVIA = 42;
   public static final int e_jinglebell = 17;
@@ -61,8 +61,7 @@ public class sym {
   public static final int QUIEN = 24;
   public static final int ESPERARASANTA = 44;
   public static final int div_float_blitzen = 30;
-  public static final int INTEGER_LITERAL = 49;
-  public static final int IDENTIFIER = 48;
+  public static final int INTEGER_LITERAL = 48;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -112,7 +111,6 @@ public class sym {
   "TRINEO",
   "PERSONA",
   "NAVIDAD",
-  "IDENTIFIER",
   "INTEGER_LITERAL",
   "ENTREGA",
   "REGALO",

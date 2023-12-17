@@ -79,7 +79,7 @@ public class App {// Clase principal del programa a ejecutar
          * GenerarPrueba para evitar problemas
          */
 
-        // GenerarLexerParser();
+        //GenerarLexerParser();
 
         // Se ejecuta la prueba del archivo codigo.txt
         // Los resultados se guardan en el archivo resultado.txt

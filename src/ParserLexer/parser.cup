@@ -53,7 +53,7 @@ terminal not_gaspar, and_melchior, or_balthassar;
 terminal ELFO, HADA, DUENDE, ENVUELVE, HACE, REVISA, ENVIA, CORTA, ESPERARASANTA, TRINEO;
 
 //Terminales de identificador, entrega y ERROR
-terminal PERSONA, NAVIDAD, IDENTIFIER, INTEGER_LITERAL, ENTREGA, REGALO, ERROR;
+terminal PERSONA, NAVIDAD, INTEGER_LITERAL, ENTREGA, REGALO, ERROR;
 
 
 //Terminales de lectura y escritura

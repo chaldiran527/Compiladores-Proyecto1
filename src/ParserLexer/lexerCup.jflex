@@ -168,7 +168,7 @@ Character = \' {InputCharacter} \'
     {Delimiter}                    { return symbol(sym.FINREGALO); }
     
     //Identificador para variables
-    {Identifier}                   { return symbol(sym.IDENTIFIER); }
+    {Identifier}                   { return symbol(sym.PERSONA); }
 
     //Tipos de datos literales
     {Character}                    { return symbol(sym.REGALO);} 
@@ -216,7 +216,7 @@ Character = \' {InputCharacter} \'
 }
 
 
-<YYINITIAL,ERROR> [^ \t\n\r\"\-\+]* {
+<YYINITIAL,ERROR> [^ \t\n\r\"\-\)\(\+\!\{\}\[\]\|\,\#]* {
     // Ignorar cualquier otro carácter durante la recuperación
     yycolumn += yylength();
     return symbol(sym.ERROR);
